@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="22dp"
+    app:cardElevation="1dp"
+    android:id="@+id/background"
+    app:cardBackgroundColor="#87c8f9"
+    android:layout_height="160dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/icon_card"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="#97D2FB"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="360dp">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:src="@drawable/iron"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/service_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ironning"
+            android:textAllCaps="true"
+            android:textSize="22dp"
+            android:padding="10sp"
+            android:textColor="#1d0f26"
+            android:fontFamily="@font/title"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+<TextView
+    android:id="@+id/offer_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:textColor="#120206"
+    android:fontFamily="@font/button"
+    android:text="Enjoy 10% off ironning services"/>
+
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/order_card"
+    android:layout_width="match_parent"
+    android:layout_height="27dp"
+    android:layout_marginLeft="10dp"
+    app:cardBackgroundColor="#aedaf9"
+    android:layout_marginRight="29dp"
+    android:layout_marginTop="-2dp"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="36dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Order Now"
+        android:textAlignment="center"
+        android:textColor="#0F0B02"
+        android:gravity="center"
+        android:fontFamily="@font/semi"/>
+</androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/clothing_iron"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

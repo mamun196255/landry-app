@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="y1">#f7d787</color>
+    <color name="y2">#f9e5ac</color>
+    <color name="y3">#f9e4ae</color>
+    <color name="background">#f3f3f3</color>
+    <color name="back_amount">#0067c6</color>
+    <color name="button_color">#FFA500</color>
+    <color name="yellow">#FFC107</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#F44336</color>
+    <color name="blue">#2196F3</color>
+    <color name="gray">#9E9E9E</color>
+
+</resources>
