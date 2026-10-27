@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -77,16 +78,16 @@ public class OrderHistoryViewHolder extends RecyclerView.Adapter<OrderHistoryVie
                 );
                 break;
         }
-
         holder.card_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, Order_Details.class));
+
+                Intent intent = new Intent(context, Order_Details.class);
+                intent.putExtra("key", itemList.get(position).getKey());
+                context.startActivity(intent);
             }
         });
-
     }
-
     @Override
     public int getItemCount() {
         return itemList.size();

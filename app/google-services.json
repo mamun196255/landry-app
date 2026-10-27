@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "618549188305",
+    "firebase_url": "https://image-store-infirebase-default-rtdb.firebaseio.com",
+    "project_id": "image-store-infirebase",
+    "storage_bucket": "image-store-infirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618549188305:android:42427e4157faccfe0e97f0",
+        "android_client_info": {
+          "package_name": "com.example.assignment_writer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4p060zv9YoTFC4AHocG5uFVQs2kToxs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618549188305:android:69769b0cedf01bb50e97f0",
+        "android_client_info": {
+          "package_name": "com.example.ghuraghuri"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4p060zv9YoTFC4AHocG5uFVQs2kToxs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618549188305:android:d81b0f6da3c72b7a0e97f0",
+        "android_client_info": {
+          "package_name": "com.example.ghuraghuriappdatastore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4p060zv9YoTFC4AHocG5uFVQs2kToxs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618549188305:android:efe366ceda2d0cbd0e97f0",
+        "android_client_info": {
+          "package_name": "com.example.image_store_infirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4p060zv9YoTFC4AHocG5uFVQs2kToxs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618549188305:android:bce924c58e6d8bf80e97f0",
+        "android_client_info": {
+          "package_name": "com.example.laundry_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4p060zv9YoTFC4AHocG5uFVQs2kToxs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

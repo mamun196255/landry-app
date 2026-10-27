@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/laundry_back">
-
-
+    android:background="@drawable/app_cover">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

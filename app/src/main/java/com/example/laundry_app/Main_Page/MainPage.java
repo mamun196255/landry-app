@@ -3,7 +3,9 @@ package com.example.laundry_app.Main_Page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,11 +25,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.laundry_app.HomePage.HomeSliderPage;
 import com.example.laundry_app.R;
+import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainPage extends Fragment implements View.OnClickListener{
+public class MainPage extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private List<MainPageModelClass> itemList;
@@ -34,10 +39,11 @@ public class MainPage extends Fragment implements View.OnClickListener{
     private ImageSliderAdapter sliderAdapter;
     private LinearLayout aDotsLayout;
     private TextView[] dots;
-    ImageView addImage;
+
+    private ImageView addImage;
     private ScrollView scrollView;
 
-    private Handler sliderHandler = new Handler();
+    private Handler sliderHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,20 +55,40 @@ public class MainPage extends Fragment implements View.OnClickListener{
         imageSlider = view.findViewById(R.id.imageSlider);
         scrollView = view.findViewById(R.id.scrollView);
         aDotsLayout = view.findViewById(R.id.indicator);
-        addImage=view.findViewById(R.id.adImage);
+        addImage = view.findViewById(R.id.adImage);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         itemList = new ArrayList<>();
-
-        itemList.add(new MainPageModelClass(R.drawable.cloth, R.drawable.cargo,"9 march,2026","7 march,2026","Shirt","Cargo",12.00,20.00));
-        itemList.add(new MainPageModelClass(R.drawable.pants,R.drawable.tshirt,"12 march,2026","18 march,2026","Pants","T-Shirt",18.00,10.00));
-        itemList.add(new MainPageModelClass(R.drawable.cargo, R.drawable.shoe,"8 march,2026","12 march,2026","Cargo","Shoe",20.00,30.00));
-        itemList.add(new MainPageModelClass(R.drawable.cloth, R.drawable.cargo,"9 march,2026","7 march,2026","Shirt","Cargo",12.00,20.00));
-        itemList.add(new MainPageModelClass(R.drawable.cargo, R.drawable.shoe,"8 march,2026","12 march,2026","Cargo","Shoe",20.00,30.00));
-
         MainPageViewHolder adapter = new MainPageViewHolder(getContext(), itemList);
         recyclerView.setAdapter(adapter);
+
+
+        DatabaseReference databaseReference =
+                FirebaseDatabase.getInstance()
+                        .getReference("Laundry app")
+                        .child("Mainpage_Recyclerview");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                itemList.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    MainPageModelClass model = dataSnapshot.getValue(MainPageModelClass.class);
+
+                    if (model != null) {
+                        itemList.add(model);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         setImageSlider();
         getScrollViewAnimation();
@@ -72,55 +98,76 @@ public class MainPage extends Fragment implements View.OnClickListener{
         return view;
     }
 
-    private void getScrollViewAnimation() {
-
-        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-
-            float alphaSlider = 1f - (float) scrollY / imageSlider.getHeight();
-            alphaSlider = Math.max(0f, Math.min(1f, alphaSlider));
-
-            imageSlider.setAlpha(alphaSlider);
-            aDotsLayout.setAlpha(alphaSlider);
-        });
-    }
 
     private void setImageSlider() {
 
         List<SliderItem> images = new ArrayList<>();
 
-        images.add(new SliderItem(R.drawable.cover1));
-        images.add(new SliderItem(R.drawable.img_1));
-        images.add(new SliderItem(R.drawable.img_2));
-        images.add(new SliderItem(R.drawable.img_3));
+        DatabaseReference databaseReference =
+                FirebaseDatabase.getInstance()
+                        .getReference("Laundry app")
+                        .child("homeOffer");
 
-        sliderAdapter = new ImageSliderAdapter(images,getContext());
-        imageSlider.setAdapter(sliderAdapter);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        setupIndicator(images.size());
+                images.clear();
 
-        imageSlider.setOffscreenPageLimit(3);
+                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                    SliderItem item = childSnapshot.getValue(SliderItem.class);
+                    if (item != null) {
+                        images.add(item);
+                    }
+                }
 
-        CompositePageTransformer transformer = new CompositePageTransformer();
-        transformer.addTransformer(new MarginPageTransformer(20));
+                sliderAdapter = new ImageSliderAdapter(images, imageSlider, getContext());
+                imageSlider.setAdapter(sliderAdapter);
 
-        transformer.addTransformer((page, position) -> {
-            float r = 1 - Math.abs(position);
-            page.setScaleY(0.85f + r * 0.15f);
-        });
 
-        imageSlider.setPageTransformer(transformer);
+                setupIndicator(images.size());
 
-        imageSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                imageSlider.setOffscreenPageLimit(3);
+
+                CompositePageTransformer transformer = new CompositePageTransformer();
+                transformer.addTransformer(new MarginPageTransformer(20));
+                transformer.addTransformer((page, position) -> {
+                    float r = 1 - Math.abs(position);
+                    page.setScaleY(0.85f + r * 0.15f);
+                });
+
+                imageSlider.setPageTransformer(transformer);
+
+                imageSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        super.onPageSelected(position);
+
+                        setCurrentIndicator(position);
+                        sliderHandler.removeCallbacks(sliderRunnable);
+                        sliderHandler.postDelayed(sliderRunnable, 3000);
+                    }
+                });
+            }
 
             @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-
-                setCurrentIndicator(position % dots.length);
-
-                sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable, 3000);
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", error.getMessage());
             }
+        });
+    }
+
+    private void getScrollViewAnimation() {
+
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+
+            if (imageSlider == null || imageSlider.getHeight() == 0) return;
+
+            float alpha = 1f - (float) scrollY / imageSlider.getHeight();
+            alpha = Math.max(0f, Math.min(1f, alpha));
+
+            imageSlider.setAlpha(alpha);
+            aDotsLayout.setAlpha(alpha);
         });
     }
 
@@ -141,6 +188,8 @@ public class MainPage extends Fragment implements View.OnClickListener{
 
     private void setupIndicator(int count) {
 
+        if (count <= 0) return;
+
         dots = new TextView[count];
         aDotsLayout.removeAllViews();
 
@@ -159,24 +208,20 @@ public class MainPage extends Fragment implements View.OnClickListener{
 
     private void setCurrentIndicator(int position) {
 
+        if (dots == null || dots.length == 0) return;
+
         for (int i = 0; i < dots.length; i++) {
 
             if (i == position) {
-
                 dots[i].setTextColor(getResources().getColor(R.color.y1, getContext().getTheme()));
-
             } else {
-
                 dots[i].setTextColor(getResources().getColor(R.color.black, getContext().getTheme()));
             }
         }
     }
 
     @Override
-
     public void onClick(View v) {
-
         startActivity(new Intent(getContext(), HomeSliderPage.class));
-
     }
 }

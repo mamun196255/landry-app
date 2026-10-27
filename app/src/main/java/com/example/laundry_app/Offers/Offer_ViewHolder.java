@@ -1,17 +1,21 @@
 package com.example.laundry_app.Offers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.laundry_app.Order.OrderActivity;
 import com.example.laundry_app.R;
 import com.squareup.picasso.Picasso;
 
@@ -39,19 +43,19 @@ public class Offer_ViewHolder extends RecyclerView.Adapter<Offer_ViewHolder.View
     public void onBindViewHolder(@NonNull Offer_ViewHolder.ViewHolder holder, int position) {
 
         Picasso.get()
-                .load(itemList.get(position).getIcon())
+                .load(itemList.get(position).getImage1())
                 .placeholder(R.drawable.load_back)
                 .error(R.drawable.load_back)
                 .into(holder.icon);
 
         Picasso.get()
-                .load(itemList.get(position).getImage())
+                .load(itemList.get(position).getImage2())
                 .placeholder(R.drawable.load_back)
                 .error(R.drawable.load_back)
                 .into(holder.image);
 
         holder.offer_text.setText(itemList.get(position).getOffer_text());
-        holder.service_type.setText(itemList.get(position).getService_type());
+        holder.service_type.setText(itemList.get(position).getTitle());
 
         int color,color2,color3;
 
@@ -85,6 +89,10 @@ public class Offer_ViewHolder extends RecyclerView.Adapter<Offer_ViewHolder.View
 
         holder.order_card.setOnClickListener(v -> {
 
+            Intent intent=new Intent(context, OrderActivity.class);
+            intent.putExtra("offer_price",itemList.get(position).getOffer_price());
+
+            context.startActivity(intent);
         });
     }
 

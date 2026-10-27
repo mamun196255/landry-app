@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MainPageViewHolder extends RecyclerView.Adapter<MainPageViewHolder.ViewHolder>implements View.OnClickListener{
+public class MainPageViewHolder extends RecyclerView.Adapter<MainPageViewHolder.ViewHolder>{
     private Context context;
     private List<MainPageModelClass>itemList;
 
@@ -51,7 +51,6 @@ public class MainPageViewHolder extends RecyclerView.Adapter<MainPageViewHolder.
 
         holder.date1.setText(itemList.get(position).getDate1());
         holder.date2.setText(itemList.get(position).getDate2());
-
         holder.service_type1.setText(itemList.get(position).getService_type1());
         holder.service_type2.setText(itemList.get(position).getService_type2());
         holder.service_amount1.setText("৳"+itemList.get(position).getService_amount1());
@@ -81,19 +80,32 @@ public class MainPageViewHolder extends RecyclerView.Adapter<MainPageViewHolder.
         holder.date_card1.setCardBackgroundColor(color);
         holder.date_card2.setCardBackgroundColor(color2);
 
-        holder.card1.setOnClickListener(this);
-        holder.card2.setOnClickListener(this);
+        holder.card1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Service_Show.class);
+                intent.putExtra("price", itemList.get(position).service_amount1);
+                intent.putExtra("productId","LLLDF201");
+                intent.putExtra("type",itemList.get(position).service_type1);
+                intent.putExtra("image",itemList.get(position).getImage1());
+                context.startActivity(intent);
+            }
+        });
+        holder.card2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Service_Show.class);
+                intent.putExtra("price", itemList.get(position).service_amount2);
+                intent.putExtra("type",itemList.get(position).service_type2);
+                intent.putExtra("image",itemList.get(position).getImage2());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return itemList.size();
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        context.startActivity(new Intent(context, Service_Show.class));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

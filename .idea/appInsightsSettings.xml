@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.laundry_app" />
+                  <option name="mobileSdkAppId" value="1:618549188305:android:bce924c58e6d8bf80e97f0" />
+                  <option name="projectId" value="image-store-infirebase" />
+                  <option name="projectNumber" value="618549188305" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

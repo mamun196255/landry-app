@@ -1,24 +1,25 @@
 package com.example.laundry_app.Main_Page;
 
 public class MainPageModelClass {
-
-    private int image1,image2;
+    String image1,image2;
+    String image;
     String date1,date2,service_type1,service_type2;
+    int quantity;
     double service_amount1,service_amount2;
 
-    public int getImage1() {
+    public String getImage1() {
         return image1;
     }
 
-    public void setImage1(int image1) {
+    public void setImage1(String image1) {
         this.image1 = image1;
     }
 
-    public int getImage2() {
+    public String getImage2() {
         return image2;
     }
 
-    public void setImage2(int image2) {
+    public void setImage2(String image2) {
         this.image2 = image2;
     }
 
@@ -70,8 +71,29 @@ public class MainPageModelClass {
         this.service_amount2 = service_amount2;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    public MainPageModelClass(String image, int quantity) {
+
+        this.image = image;
+        this.quantity = quantity;
+    }
+    public MainPageModelClass(){};
     public MainPageModelClass(
-            int image1,int image2,String date1,
+           String image1,String image2,String date1,
             String date2,String service_type1,String service_type2,
             double service_amount1,double service_amount2
     ){

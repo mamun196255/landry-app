@@ -1,7 +1,18 @@
 package com.example.laundry_app.OrderHistory;
 
 public class OrderHistoryModel {
-    String order_date,order_id,status_text,delivery_date,service_type,pickup_address,total_amount;
+    String order_date,orderId,order_status,delivery_date,serviceType,pickup_address,total_amount;
+
+
+    String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getOrder_date() {
         return order_date;
@@ -12,11 +23,11 @@ public class OrderHistoryModel {
     }
 
     public String getOrder_id() {
-        return order_id;
+        return orderId;
     }
 
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
+    public void setOrder_id(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getDelivery_date() {
@@ -28,11 +39,11 @@ public class OrderHistoryModel {
     }
 
     public String getService_type() {
-        return service_type;
+        return serviceType;
     }
 
-    public void setService_type(String service_type) {
-        this.service_type = service_type;
+    public void setService_type(String serviceType) {
+        this.serviceType = serviceType;
     }
 
     public String getPickup_address() {
@@ -52,20 +63,20 @@ public class OrderHistoryModel {
     }
 
     public String getStatus_text() {
-        return status_text;
+        return order_status;
     }
 
-    public void setStatus_text(String status_text) {
-        this.status_text = status_text;
+    public void setStatus_text(String order_status) {
+        this.order_status = order_status;
     }
-
-    public OrderHistoryModel(String order_date, String order_id, String status_text, String delivery_date, String service_type, String pickup_address, String total_amount){
+    public OrderHistoryModel() {}
+    public OrderHistoryModel(String order_date, String orderId, String order_status, String delivery_date, String service_type, String pickup_address, String total_amount){
 
         this.order_date=order_date;
-        this.order_id=order_id;
-        this.status_text=status_text;
+        this.orderId=orderId;
+        this.order_status=order_status;
         this.delivery_date=delivery_date;
-        this.service_type=service_type;
+        this.serviceType=service_type;
         this.pickup_address=pickup_address;
         this.total_amount=total_amount;
     }

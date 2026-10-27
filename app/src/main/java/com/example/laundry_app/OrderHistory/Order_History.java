@@ -2,6 +2,7 @@ package com.example.laundry_app.OrderHistory;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,8 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.laundry_app.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +26,7 @@ public class Order_History extends Fragment {
 
     RecyclerView order_recyclerview;
     List<OrderHistoryModel>itemList;
+    DatabaseReference reference;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,15 +37,47 @@ public class Order_History extends Fragment {
 
         order_recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         itemList=new ArrayList<>();
-        itemList.add(new OrderHistoryModel("12 March, 2026","AD45283","Pending","15 March, 2026","Shirt + pant","401(c), CSTU Student Hall","৳120.00"));
-        itemList.add(new OrderHistoryModel("14 March, 2026","ADF4523","Accepted","17 March, 2026","Ironing","401(c), CSTU Student Hall","৳110.90"));
-        itemList.add(new OrderHistoryModel("17 March, 2026","BFF4523","Pending","20 March, 2026","Shirt Wash","401(c), CSTU Student Hall","৳80.00"));
-        itemList.add(new OrderHistoryModel("25 March, 2026","BFF4523","Cancelled","28March, 2026","Shirt + pant","401(c), CSTU Student Hall","৳96.00"));
-        itemList.add(new OrderHistoryModel("25 March, 2026","BFF4523","Delivered","28March, 2026","Shirt + pant","401(c), CSTU Student Hall","৳96.00"));
+
+        reference = FirebaseDatabase.getInstance().getReference("Laundry app").child("Confirm Order");
 
 
-        OrderHistoryViewHolder adapter=new OrderHistoryViewHolder(getContext(),itemList);
+        OrderHistoryViewHolder adapter = new OrderHistoryViewHolder(getContext(), itemList);
         order_recyclerview.setAdapter(adapter);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                itemList.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    String order_date=dataSnapshot.child("order_date").getValue(String.class);
+                    String orderId=dataSnapshot.child("orderId").getValue(String.class);
+                    String delivery_date=dataSnapshot.child("delivery_date").getValue(String.class);
+                    String serviceType=dataSnapshot.child("serviceType").getValue(String.class);
+                    String pickup_address=dataSnapshot.child("pickup_address").getValue(String.class);
+                    String order_status=dataSnapshot.child("order_status").getValue(String.class);
+                    String total_amount=dataSnapshot.child("total_amount").getValue(String.class);
+
+                    OrderHistoryModel model = new OrderHistoryModel(
+                            order_date, orderId, order_status,
+                            delivery_date, serviceType, pickup_address, total_amount
+                    );
+
+                    model.setKey(dataSnapshot.getKey());
+
+                    itemList.add(model);
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

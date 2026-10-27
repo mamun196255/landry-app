@@ -64,6 +64,7 @@
                         android:textSize="18sp"/>
 
                     <TextView
+                        android:id="@+id/pickup_date"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="11 March, 2026"
@@ -98,6 +99,7 @@
                         android:layout_marginTop="10dp">
 
                         <ImageView
+                            android:id="@+id/image"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/tshirt"
@@ -109,6 +111,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/product_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="T-Shirt"
@@ -118,6 +121,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/product_quantity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Quantity: 1"
@@ -129,6 +133,7 @@
 
 
                     <TextView
+                        android:id="@+id/sub_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Subtotal: ৳00.00"
@@ -146,6 +151,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/total_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total Amount: ৳00.00"
@@ -175,6 +181,7 @@
                 app:cardCornerRadius="10dp">
 
                 <EditText
+                    android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
@@ -195,6 +202,7 @@
                 app:cardCornerRadius="10dp">
 
                 <EditText
+                    android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
@@ -213,6 +221,7 @@
                 app:cardCornerRadius="10dp">
 
                 <EditText
+                    android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="phone"
@@ -244,6 +253,7 @@
                 android:layout_margin="10dp"
                 >
                 <Spinner
+                    android:id="@+id/spinner1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -260,6 +270,7 @@
                 android:layout_margin="10dp"
                 >
                 <Spinner
+                    android:id="@+id/spinner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -277,22 +288,37 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/confirm_button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 app:cardBackgroundColor="@color/button_color"
                 app:cardCornerRadius="10dp"
+                android:layout_marginTop="10dp"
                 app:cardElevation="2dp"
                 >
-                <TextView
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Confirm Order"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/button"
-                    android:textColor="@color/black"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textSize="20sp"/>
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:id="@+id/progress"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:progressDrawable="@color/back_amount"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Confirm Order"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/button"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textSize="20sp"/>
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 

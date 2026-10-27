@@ -2,4 +2,54 @@
     <string name="app_name">Laundry-App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="spinner">
+        <item>Wash</item>
+        <item>Ironing</item>
+        <item>Wash+Ironing</item>
+    </string-array>
+
+
+    <string-array name="spinner1">
+        <item>Student Hall-01</item>
+        <item>Student Hall-02</item>
+    </string-array>
+
+
+    <string-array name="spinner2">
+
+        <item>201(A)</item>
+        <item>201(B)</item>
+        <item>201(C)</item>
+        <item>202(A)</item>
+        <item>202(B)</item>
+        <item>202(C)</item>
+        <item>301(A)</item>
+        <item>301(B)</item>
+        <item>301(C)</item>
+        <item>302(A)</item>
+        <item>302(B)</item>
+        <item>302(C)</item>
+        <item>401(A)</item>
+        <item>401(B)</item>
+        <item>401(C)</item>
+        <item>402(A)</item>
+        <item>402(B)</item>
+        <item>402(C)</item>
+        <item>501(A)</item>
+        <item>501(B)</item>
+        <item>501(C)</item>
+        <item>502(A)</item>
+        <item>502(B)</item>
+        <item>502(C)</item>
+        <item>601(A)</item>
+        <item>601(B)</item>
+        <item>601(C)</item>
+        <item>602(A)</item>
+        <item>602(B)</item>
+        <item>602(C)</item>
+
+    </string-array>
+
 </resources>

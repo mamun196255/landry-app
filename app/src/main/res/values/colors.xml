@@ -10,8 +10,12 @@
     <color name="button_color">#FFA500</color>
     <color name="yellow">#FFC107</color>
     <color name="green">#4CAF50</color>
+    <color name="transparent">#00000000</color>
     <color name="red">#F44336</color>
     <color name="blue">#2196F3</color>
     <color name="gray">#9E9E9E</color>
+    <color name="text3">#01004E</color>
+    <color name="text">#011c27</color>
+    <color name="text2">#00A658</color>
 
 </resources>

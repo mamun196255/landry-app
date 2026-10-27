@@ -118,6 +118,7 @@
 
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/removed"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="5dp"
@@ -125,7 +126,6 @@
                                 android:layout_weight="1">
 
                                 <ImageView
-                                    android:id="@+id/removed"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/math"
@@ -149,6 +149,7 @@
 
 
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/added"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="5dp"
@@ -156,7 +157,7 @@
                                 app:cardCornerRadius="360dp">
 
                                 <ImageView
-                                    android:id="@+id/added"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/add"

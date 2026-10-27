@@ -24,13 +24,12 @@ import java.util.List;
 public class Service_ViewHolder extends RecyclerView.Adapter<Service_ViewHolder.ViewHolder>implements View.OnClickListener{
 
     private Context context;
-    private List<Service_Model> itemList;
+    private List<ServiceViewPair> itemList;
 
-    public Service_ViewHolder(Context context,List<Service_Model> itemList){
+    public Service_ViewHolder(Context context,List<ServiceViewPair> itemList){
         this.context = context;
         this.itemList = itemList;
     }
-
 
     @NonNull
     @Override
@@ -42,25 +41,27 @@ public class Service_ViewHolder extends RecyclerView.Adapter<Service_ViewHolder.
     @Override
     public void onBindViewHolder(@NonNull Service_ViewHolder.ViewHolder holder, int position) {
 
+
+        ServiceViewPair pair=itemList.get(position);
+        holder.time_line_text1.setText((pair.getPair1()).getTime_line());
+        holder.time_line_text2.setText((pair.getPair2()).getTime_line());
+        holder.service_type1.setText(pair.getPair1().getService_type());
+        holder.service_type2.setText(pair.getPair2().getService_type());
+        holder.service_amount1.setText(String.valueOf(pair.getPair1().getService_amount()));
+        holder.service_amount2.setText(String.valueOf(pair.getPair2().getService_amount()));
+
+
         Picasso.get()
-                .load(itemList.get(position).getImage1())
+                .load(pair.getPair1().getImage())
                 .placeholder(R.drawable.load_back)
                 .error(R.drawable.load_back)
                 .into(holder.image1);
 
         Picasso.get()
-                .load(itemList.get(position).getImage2())
+                .load(pair.getPair2().getImage())
                 .placeholder(R.drawable.load_back)
                 .error(R.drawable.load_back)
                 .into(holder.image2);
-
-    holder.time_line_text1.setText(itemList.get(position).getTime_line_text1());
-    holder.time_line_text2.setText(itemList.get(position).getTime_line_text2());
-
-    holder.service_amount1.setText("৳"+itemList.get(position).getService_amount1());
-    holder.service_amount2.setText("৳"+itemList.get(position).getService_amount2());
-    holder.service_type1.setText(itemList.get(position).getService_type1());
-    holder.service_type2.setText(itemList.get(position).getService_type2());
 
         int color,color2;
 
