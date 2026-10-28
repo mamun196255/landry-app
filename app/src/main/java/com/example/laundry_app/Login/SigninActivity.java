@@ -139,3 +139,10 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
         }
         }
     }
+
+int void (int x){
+
+int i=0;
+
+     for(i=0;i<x;i++){
+                    Toast.makeText(SigninActivity.this, "Server Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
